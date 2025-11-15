@@ -1,7 +1,7 @@
 export function createIndex(data) {
     const index = {};
-    data.forEach((aluno, i) => {
-        const key = String(aluno.nome[0] || "").toLowerCase();
+    data.forEach((tio, i) => {
+        const key = String(tio.remetente?.[0] || "").toLowerCase();
         if (!index[key]) index[key] = [];
         index[key].push(i);
     });
@@ -13,15 +13,17 @@ export function indexedSearch(index, data, term) {
     const key = lowerTerm[0];
     const candidates = index[key] ? index[key].map((i) => data[i]) : [];
 
-    const results = candidates.filter((aluno) => {
-        const matricula = String(aluno.matricula).toLowerCase();
-        const nome = String(aluno.nome).toLowerCase();
-        const dia = String(aluno.diaSemana).toLowerCase();
+    const results = candidates.filter((tio) => {
+        const matricula = String(tio.matricula).toLowerCase();
+        const remetente = String(tio.remetente).toLowerCase();
+        const frequencia = String(tio.frequenciaEnvio).toLowerCase();
+        const tipoCorrente = String(tio.tipoCorrente).toLowerCase();
 
         return (
             matricula.includes(lowerTerm) ||
-            nome.includes(lowerTerm) ||
-            dia.includes(lowerTerm)
+            remetente.includes(lowerTerm) ||
+            frequencia.includes(lowerTerm) ||
+            tipoCorrente.includes(lowerTerm)
         );
     });
 

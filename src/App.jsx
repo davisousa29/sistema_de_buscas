@@ -5,7 +5,6 @@ import { sequentialSearch } from "./components/SequentialSearch";
 import { createIndex, indexedSearch } from "./components/IndexedSearch";
 import { createHash, hashSearch } from "./components/HashSearch";
 
-// Componentes desacoplados
 import DataTable from "./components/DataTable";
 import ResultsTable from "./components/ResultsTable";
 import PerformanceChart from "./components/PerformanceChart";
@@ -16,18 +15,16 @@ function App() {
     const [hash, setHash] = useState({});
     const [input, setInput] = useState("");
     const [results, setResults] = useState(null);
-    const [foundData, setFoundData] = useState([]); // resultados encontrados
-    const [searchPerformed, setSearchPerformed] = useState(false); // ✅ novo estado para saber se já foi feita uma busca
+    const [foundData, setFoundData] = useState([]);
+    const [searchPerformed, setSearchPerformed] = useState(false);
 
-    // Gera a base inicial
     useEffect(() => {
-        const alunos = generateData();
-        setData(alunos);
-        setIndex(createIndex(alunos));
-        setHash(createHash(alunos));
+        const tios = generateData();
+        setData(tios);
+        setIndex(createIndex(tios));
+        setHash(createHash(tios));
     }, []);
 
-    // Executa as buscas
     const handleSearch = () => {
         if (!input) return alert("Digite algo para buscar!");
         setSearchPerformed(true);
@@ -36,10 +33,8 @@ function App() {
         const indexed = measureTime(() => indexedSearch(index, data, input));
         const hashResult = measureTime(() => hashSearch(hash, input));
 
-        // resultados encontrados
         setFoundData(sequential.result || []);
 
-        // cálculos de melhoria
         const melhoriaIndexada =
             sequential.time > 0
                 ? 100 - (indexed.time / sequential.time) * 100
@@ -59,12 +54,11 @@ function App() {
         });
     };
 
-    // Gera nova base
     const handleGenerate = () => {
-        const alunos = generateData();
-        setData(alunos);
-        setIndex(createIndex(alunos));
-        setHash(createHash(alunos));
+        const tios = generateData();
+        setData(tios);
+        setIndex(createIndex(tios));
+        setHash(createHash(tios));
         setResults(null);
         setFoundData([]);
         setSearchPerformed(false);
@@ -73,18 +67,18 @@ function App() {
     return (
         <div className="p-10 font-sans">
             <h1 className="text-2xl font-bold mb-2">
-                Comparador de Algoritmos de Busca
+                Lista de "Tios do WhatsApp" e suas Correntes
             </h1>
             <p className="text-gray-700 mb-6">
-                Simulação com {data.length} registros de alunos
+                A lista é composta por {data.length} tios que já espalharam alguma corrente do whatsapp
             </p>
 
             <div className="mb-6 flex gap-2">
                 <input
-                    placeholder="Digite matrícula, nome ou dia da semana"
+                    placeholder="Digite a matrícula do tio, ou o nome, ou a frenquência"
                     value={input}
                     onChange={(e) => setInput(e.target.value)}
-                    className="border p-2 rounded w-96"
+                    className="border p-2 rounded w-96 text-sm"
                 />
                 <button
                     onClick={handleSearch}
@@ -100,10 +94,8 @@ function App() {
                 </button>
             </div>
 
-            {/* ✅ Tabela de dados completa */}
             <DataTable data={data} />
 
-            {/* ✅ Resultados da busca */}
             <div className="mt-10">
                 <h2 className="text-xl font-semibold mb-3">
                     Resultados da Busca
@@ -122,37 +114,38 @@ function App() {
                                 <thead className="bg-gray-100 sticky top-0">
                                     <tr>
                                         <th className="px-4 py-2 border text-left">
-                                            ID
-                                        </th>
-                                        <th className="px-4 py-2 border text-left">
                                             Matrícula
                                         </th>
                                         <th className="px-4 py-2 border text-left">
-                                            Nome
+                                            Tio(a)
                                         </th>
                                         <th className="px-4 py-2 border text-left">
-                                            Dia da Semana
+                                            Tipo de corrente
+                                        </th>
+                                        <th className="px-4 py-2 border text-left">
+                                            Frenquência
                                         </th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    {foundData.map((aluno) => (
+                                    {foundData.map((tio) => (
                                         <tr
-                                            key={aluno.id}
+                                            key={tio.id}
                                             className="hover:bg-gray-50"
                                         >
                                             <td className="px-4 py-2 border">
-                                                {aluno.id}
+                                                {tio.matricula}
                                             </td>
                                             <td className="px-4 py-2 border">
-                                                {aluno.matricula}
+                                                {tio.remetente}
                                             </td>
                                             <td className="px-4 py-2 border">
-                                                {aluno.nome}
+                                                {tio.frequenciaEnvio}
                                             </td>
                                             <td className="px-4 py-2 border">
-                                                {aluno.diaSemana}
+                                                {tio.tipoCorrente}
                                             </td>
+                                            
                                         </tr>
                                     ))}
                                 </tbody>

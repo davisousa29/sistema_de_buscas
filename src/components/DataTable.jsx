@@ -6,26 +6,30 @@ export default function DataTable({ data }) {
             <table className="min-w-full border-collapse text-sm">
                 <thead className="bg-gray-100 sticky top-0">
                     <tr>
-                        <th className="border px-3 py-2 text-left">ID</th>
                         <th className="border px-3 py-2 text-left">
                             Matrícula
                         </th>
-                        <th className="border px-3 py-2 text-left">Nome</th>
+                        <th className="border px-3 py-2 text-left">Tio(a)</th>
                         <th className="border px-3 py-2 text-left">
-                            Dia da Semana
+                            Tipo de corrente
+                        </th>
+                        <th className="border px-3 py-2 text-left">
+                            Frenquência
                         </th>
                     </tr>
                 </thead>
                 <tbody>
-                    {data.map((aluno) => (
-                        <tr key={aluno.id} className="hover:bg-gray-50">
-                            <td className="border px-3 py-2">{aluno.id}</td>
+                    {data.map((tio) => (
+                        <tr key={tio.id} className="hover:bg-gray-50">
                             <td className="border px-3 py-2">
-                                {aluno.matricula}
+                                {tio.matricula}
                             </td>
-                            <td className="border px-3 py-2">{aluno.nome}</td>
+                            <td className="border px-3 py-2">{tio.remetente}</td>
                             <td className="border px-3 py-2">
-                                {aluno.diaSemana}
+                                {tio.frequenciaEnvio}
+                            </td>
+                            <td className="border px-3 py-2">
+                                {tio.tipoCorrente}
                             </td>
                         </tr>
                     ))}

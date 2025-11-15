@@ -1,12 +1,12 @@
 // Cria hash com chave = matrícula e nome
 export function createHash(data) {
     const hash = {};
-    data.forEach((aluno) => {
-        const matriculaKey = String(aluno.matricula).toLowerCase();
-        const nomeKey = String(aluno.nome).toLowerCase();
+    data.forEach((tio) => {
+        const matriculaKey = String(tio.matricula).toLowerCase();
+        const nomeKey = String(tio.nome).toLowerCase();
 
-        hash[matriculaKey] = aluno;
-        hash[nomeKey] = aluno;
+        hash[matriculaKey] = tio;
+        hash[nomeKey] = tio;
     });
     return hash;
 }

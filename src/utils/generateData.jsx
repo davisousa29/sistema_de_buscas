@@ -1,68 +1,80 @@
 export function generateData(qtd = 5000) {
-    const nomes = [
-        "Ana",
-        "Bruno",
-        "Carlos",
-        "Daniela",
-        "Eduardo",
-        "Fernanda",
-        "Gabriel",
-        "Helena",
-        "Igor",
-        "Julia",
-        "Lucas",
-        "Mariana",
-        "Rafael",
-        "Patrícia",
-        "Thiago",
+    const tiposCorrente = [
+        "Bom dia com flores",
+        "Fake news política",
+        "Receita milagrosa",
+        "Corrente religiosa URGENTE",
+        "PDF desconhecido",
+        "Mensagem motivacional",
+        "Horóscopo inventado",
+        "Promoção falsa de supermercado",
+        "Notícia chocante sem fonte",
+        "Dica de saúde duvidosa",
     ];
+
+    const frequencias = [
+        "Diário",
+        "Semanal",
+        "Quinzenal",
+        "Mensal",
+        "De hora em hora",
+    ];
+
+    const tios = [
+        "Tio João",
+        "Tia Marlene",
+        "Tio Roberto",
+        "Tia Graça",
+        "Tio Zeca",
+        "Tia Cida",
+        "Tio Geraldo",
+        "Tia Nair",
+        "Tio Paulo",
+        "Tia Sandra",
+        "Tio Milton",
+        "Tia Neide",
+        "Tio Arlindo",
+        "Tia Rosa",
+        "Tio Sérgio",
+    ];
+
     const sobrenomes = [
         "Silva",
         "Souza",
         "Oliveira",
-        "Costa",
         "Pereira",
-        "Santos",
-        "Lima",
-        "Moura",
-        "Ribeiro",
         "Carvalho",
-    ];
-    const cursos = [
-        "Engenharia",
-        "Direito",
-        "Medicina",
-        "Administração",
-        "Sistemas de Informação",
-        "Psicologia",
-        "Arquitetura",
-        "Biologia",
-    ];
-    const dias = [
-        "Segunda-feira",
-        "Terça-feira",
-        "Quarta-feira",
-        "Quinta-feira",
-        "Sexta-feira",
+        "Nascimento",
+        "Barbosa",
+        "Macedo",
+        "Ribeiro",
+        "Gonçalves",
+        "Monteiro",
+        "Albuquerque",
+        "Moraes",
+        "Cardoso",
+        "Vieira",
     ];
 
-    const alunos = Array.from({ length: qtd }, (_, i) => {
-        const nome = `${nomes[Math.floor(Math.random() * nomes.length)]} ${
+    const dados = Array.from({ length: qtd }, (_, i) => {
+        const tipoCorrente =
+            tiposCorrente[Math.floor(Math.random() * tiposCorrente.length)];
+        const frequencia =
+            frequencias[Math.floor(Math.random() * frequencias.length)];
+
+        const nomeTio = `${tios[Math.floor(Math.random() * tios.length)]} ${
             sobrenomes[Math.floor(Math.random() * sobrenomes.length)]
         }`;
-        const curso = cursos[Math.floor(Math.random() * cursos.length)];
-        const diaSemana = dias[Math.floor(Math.random() * dias.length)];
 
         return {
-            id: i + 1,
             matricula: 20230000 + i + 1,
-            nome,
-            curso,
-            diaSemana,
+            tipoCorrente,
+            frequenciaEnvio: frequencia,
+            remetente: nomeTio,
         };
     });
 
-    console.log(`Generated ${qtd} student records.`);
-    console.log(alunos);
-    return alunos;
+    console.log(`Gerado ${qtd} registros de tios do WhatsApp.`);
+    console.log(dados);
+    return dados;
 }
