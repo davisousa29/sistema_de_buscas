@@ -5,6 +5,7 @@ import { sequentialSearch } from "./components/SequentialSearch";
 import { createIndex, indexedSearch } from "./components/IndexedSearch";
 import { createHash, hashSearch } from "./components/HashSearch";
 
+import Carousel from "./components/Carousel";
 import DataTable from "./components/DataTable";
 import ResultsTable from "./components/ResultsTable";
 import PerformanceChart from "./components/PerformanceChart";
@@ -72,6 +73,8 @@ function App() {
             <p className="text-gray-700 mb-6">
                 A lista é composta por {data.length} tios que já espalharam alguma corrente do whatsapp
             </p>
+
+            <Carousel />
 
             <div className="mb-6 flex gap-2">
                 <input
