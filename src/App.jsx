@@ -66,108 +66,110 @@ function App() {
     };
 
     return (
-        <div className="p-10 font-sans">
-            <h1 className="text-2xl font-bold mb-2">
-                Lista de "Tios do WhatsApp" e suas Correntes
+        <div className="p-5 lg:p-10 font-sans flex flex-col items-center justify-center">
+            <h1 className="text-2xl font-bold mb-2 flex flex-row">
+                Lista de <p className="text-green-500">"Tios do WhatsApp"</p> e suas Correntes
             </h1>
             <p className="text-gray-700 mb-6">
-                A lista é composta por {data.length} tios que já espalharam alguma corrente do whatsapp
+                A lista é composta por {data.length} tios que já espalharam
+                alguma corrente do whatsapp
             </p>
 
-            <Carousel />
+            <div className="lg:mx-96 bg-white p-6 rounded-lg shadow-lg w-full flex flex-col gap-6 shadow-neutral-700">
+                <Carousel />
 
-            <div className="mb-6 flex gap-2">
-                <input
-                    placeholder="Digite a matrícula do tio, ou o nome, ou a frenquência"
-                    value={input}
-                    onChange={(e) => setInput(e.target.value)}
-                    className="border p-2 rounded w-96 text-sm"
-                />
-                <button
-                    onClick={handleSearch}
-                    className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded transition"
-                >
-                    Executar buscas
-                </button>
-                <button
-                    onClick={handleGenerate}
-                    className="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded transition"
-                >
-                    Gerar nova base
-                </button>
-            </div>
+                <div className="mb-6 flex flex-col lg:flex-row gap-2 items-center justify-center">
+                    <input
+                        placeholder="Digite a matrícula do tio, ou o nome, ou a frenquência"
+                        value={input}
+                        onChange={(e) => setInput(e.target.value)}
+                        className="border p-2 rounded w-full lg:w-96 text-xs lg:text-sm"
+                    />
+                    <button
+                        onClick={handleSearch}
+                        className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 w-full lg:w-52 rounded transition"
+                    >
+                        Executar buscas
+                    </button>
+                    <button
+                        onClick={handleGenerate}
+                        className="bg-green-600 hover:bg-green-700 text-white px-4 py-2 w-full lg:w-52 rounded transition"
+                    >
+                        Gerar nova base
+                    </button>
+                </div>
 
-            <DataTable data={data} />
+                <DataTable data={data} />
 
-            <div className="mt-10">
-                <h2 className="text-xl font-semibold mb-3">
-                    Resultados da Busca
-                </h2>
+                <div className="mt-10">
+                    <h2 className="text-xl font-semibold mb-3">
+                        Resultados da Busca
+                    </h2>
 
-                {searchPerformed && foundData.length === 0 ? (
-                    <p className="text-red-600 bg-red-50 border border-red-200 rounded-lg p-3">
-                        Nenhum registro encontrado com o valor informado.
-                    </p>
-                ) : null}
-
-                {foundData.length > 0 && (
-                    <>
-                        <div className="overflow-y-auto max-h-64 border rounded-lg shadow">
-                            <table className="min-w-full border-collapse bg-white">
-                                <thead className="bg-gray-100 sticky top-0">
-                                    <tr>
-                                        <th className="px-4 py-2 border text-left">
-                                            Matrícula
-                                        </th>
-                                        <th className="px-4 py-2 border text-left">
-                                            Tio(a)
-                                        </th>
-                                        <th className="px-4 py-2 border text-left">
-                                            Tipo de corrente
-                                        </th>
-                                        <th className="px-4 py-2 border text-left">
-                                            Frenquência
-                                        </th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    {foundData.map((tio) => (
-                                        <tr
-                                            key={tio.id}
-                                            className="hover:bg-gray-50"
-                                        >
-                                            <td className="px-4 py-2 border">
-                                                {tio.matricula}
-                                            </td>
-                                            <td className="px-4 py-2 border">
-                                                {tio.remetente}
-                                            </td>
-                                            <td className="px-4 py-2 border">
-                                                {tio.frequenciaEnvio}
-                                            </td>
-                                            <td className="px-4 py-2 border">
-                                                {tio.tipoCorrente}
-                                            </td>
-                                            
-                                        </tr>
-                                    ))}
-                                </tbody>
-                            </table>
-                        </div>
-                        <p className="mt-2 text-sm text-gray-600">
-                            {foundData.length} resultado(s) encontrado(s)
+                    {searchPerformed && foundData.length === 0 ? (
+                        <p className="text-red-600 bg-red-50 border border-red-200 rounded-lg p-3">
+                            Nenhum registro encontrado com o valor informado.
                         </p>
-                    </>
+                    ) : null}
+
+                    {foundData.length > 0 && (
+                        <>
+                            <div className="overflow-y-auto max-h-64 border rounded-lg shadow">
+                                <table className="min-w-full border-collapse bg-white">
+                                    <thead className="bg-gray-100 sticky top-0">
+                                        <tr>
+                                            <th className="px-4 py-2 border text-left">
+                                                Matrícula
+                                            </th>
+                                            <th className="px-4 py-2 border text-left">
+                                                Tio(a)
+                                            </th>
+                                            <th className="px-4 py-2 border text-left">
+                                                Tipo de corrente
+                                            </th>
+                                            <th className="px-4 py-2 border text-left">
+                                                Frenquência
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {foundData.map((tio) => (
+                                            <tr
+                                                key={tio.id}
+                                                className="hover:bg-gray-50"
+                                            >
+                                                <td className="px-4 py-2 border">
+                                                    {tio.matricula}
+                                                </td>
+                                                <td className="px-4 py-2 border">
+                                                    {tio.remetente}
+                                                </td>
+                                                <td className="px-4 py-2 border">
+                                                    {tio.frequenciaEnvio}
+                                                </td>
+                                                <td className="px-4 py-2 border">
+                                                    {tio.tipoCorrente}
+                                                </td>
+                                            </tr>
+                                        ))}
+                                    </tbody>
+                                </table>
+                            </div>
+                            <p className="mt-2 text-sm text-gray-600">
+                                {foundData.length} resultado(s) encontrado(s)
+                            </p>
+                        </>
+                    )}
+                </div>
+
+                {/* ✅ Resultados de desempenho */}
+                {results && (
+                    <div className="mt-10 space-y-6">
+                        <ResultsTable results={results} />
+                        <PerformanceChart results={results} />
+                    </div>
                 )}
             </div>
-
-            {/* ✅ Resultados de desempenho */}
-            {results && (
-                <div className="mt-10 space-y-6">
-                    <ResultsTable results={results} />
-                    <PerformanceChart results={results} />
-                </div>
-            )}
         </div>
     );
 }
