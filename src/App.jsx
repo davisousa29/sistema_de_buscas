@@ -68,7 +68,8 @@ function App() {
     return (
         <div className="p-5 lg:p-10 font-sans flex flex-col items-center justify-center">
             <h1 className="text-2xl font-bold mb-2 flex flex-row">
-                Lista de <p className="text-green-500">"Tios do WhatsApp"</p> e suas Correntes
+                Lista de <p className="text-green-500">"Tios do WhatsApp"</p> e
+                suas Correntes
             </h1>
             <p className="text-gray-700 mb-6">
                 A lista é composta por {data.length} tios que já espalharam
@@ -101,9 +102,9 @@ function App() {
 
                 <DataTable data={data} />
 
-                <div className="mt-10">
+                <div className="flex flex-col items-center justify-center w-full">
                     <h2 className="text-xl font-semibold mb-3">
-                        Resultados da Busca
+                        Resultado(s) encontrado(s)
                     </h2>
 
                     {searchPerformed && foundData.length === 0 ? (
@@ -114,20 +115,20 @@ function App() {
 
                     {foundData.length > 0 && (
                         <>
-                            <div className="overflow-y-auto max-h-64 border rounded-lg shadow">
-                                <table className="min-w-full border-collapse bg-white">
-                                    <thead className="bg-gray-100 sticky top-0">
+                            <div className="max-h-80 w-full overflow-y-auto rounded-lg mb-8 shadow-xl">
+                                <table className="w-full">
+                                    <thead className="bg-gray-300 sticky top-0">
                                         <tr>
-                                            <th className="px-4 py-2 border text-left">
+                                            <th className=" px-3 py-2 text-left">
                                                 Matrícula
                                             </th>
-                                            <th className="px-4 py-2 border text-left">
+                                            <th className=" px-3 py-2 text-left">
                                                 Tio(a)
                                             </th>
-                                            <th className="px-4 py-2 border text-left">
+                                            <th className=" px-3 py-2 text-left">
                                                 Tipo de corrente
                                             </th>
-                                            <th className="px-4 py-2 border text-left">
+                                            <th className=" px-3 py-2 text-left">
                                                 Frenquência
                                             </th>
                                         </tr>
@@ -136,18 +137,18 @@ function App() {
                                         {foundData.map((tio) => (
                                             <tr
                                                 key={tio.id}
-                                                className="hover:bg-gray-50"
+                                                className="hover:bg-gray-300 transition-all ease-in-out duration-300"
                                             >
-                                                <td className="px-4 py-2 border">
+                                                <td className=" px-3 py-2">
                                                     {tio.matricula}
                                                 </td>
-                                                <td className="px-4 py-2 border">
+                                                <td className=" px-3 py-2">
                                                     {tio.remetente}
                                                 </td>
-                                                <td className="px-4 py-2 border">
+                                                <td className=" px-3 py-2">
                                                     {tio.frequenciaEnvio}
                                                 </td>
-                                                <td className="px-4 py-2 border">
+                                                <td className=" px-3 py-2">
                                                     {tio.tipoCorrente}
                                                 </td>
                                             </tr>
@@ -162,9 +163,8 @@ function App() {
                     )}
                 </div>
 
-                {/* ✅ Resultados de desempenho */}
                 {results && (
-                    <div className="mt-10 space-y-6">
+                    <div className="space-y-6">
                         <ResultsTable results={results} />
                         <PerformanceChart results={results} />
                     </div>

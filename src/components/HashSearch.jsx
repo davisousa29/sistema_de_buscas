@@ -1,32 +1,22 @@
 export function createHash(data) {
     const hash = {};
-    data.forEach((tio) => {
-        const matriculaKey = String(tio.matricula).toLowerCase();
-        const nomeKey = String(tio.remetente).toLowerCase();
 
-        hash[matriculaKey] = tio;
-        hash[nomeKey] = tio;
+    data.forEach((tio) => {
+        hash[String(tio.matricula).toLowerCase()] = tio;
+        hash[String(tio.remetente).toLowerCase()] = tio;
+        hash[String(tio.frequenciaEnvio).toLowerCase()] = tio;
+        hash[String(tio.tipoCorrente).toLowerCase()] = tio;
     });
+
     return hash;
 }
 
 export function hashSearch(hash, term) {
     const lowerTerm = String(term).toLowerCase();
-    const results = [];
 
     if (hash[lowerTerm]) {
-        results.push(hash[lowerTerm]);
-    } else {
-        for (const key in hash) {
-            if (key.includes(lowerTerm)) {
-                results.push(hash[key]);
-            }
-        }
+        return [hash[lowerTerm]];
     }
 
-    const uniqueResults = Array.from(new Set(results.map((a) => a.id))).map(
-        (id) => results.find((a) => a.id === id)
-    );
-
-    return uniqueResults;
+    return [];
 }

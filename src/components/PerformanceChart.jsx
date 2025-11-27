@@ -29,7 +29,7 @@ export default function PerformanceChart({ results }) {
     ];
 
     return (
-        <div className="mt-8">
+        <div className="flex flex-col items-center justify-center w-full">
             <h2 className="text-xl font-semibold mb-3">
                 Comparativo de Desempenho
             </h2>
